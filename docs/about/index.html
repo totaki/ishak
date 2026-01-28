@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>About ISHAK — S3 issue tracker для людей и агентов</title>
+    <meta
+      name="description"
+      content="ISHAK хранит проекты и задачи прямо в вашем S3: Markdown-структура, понятная человеку и AI-агентам, без скрытых баз данных."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#f5efe6" />
+    <link rel="canonical" href="/about/" />
+    <meta property="og:title" content="About ISHAK — S3 issue tracker" />
+    <meta
+      property="og:description"
+      content="Все хранится в вашем S3, в Markdown. Прозрачная структура и стандартный S3 API, удобный для AI-агентов."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/logo.png" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="About ISHAK" />
+    <meta
+      property="twitter:description"
+      content="S3 issue tracker с Markdown-хранилищем для людей и AI-агентов."
+    />
+    <meta property="twitter:image" content="/logo.png" />
+    <style>
+      :root {
+        --bg: #f5efe6;
+        --ink: #2a2722;
+        --muted: #6b5f54;
+        --line: rgba(42, 39, 34, 0.16);
+        --accent: #e36f2c;
+        --accent-2: #2b74ff;
+        --card: #fffdf9;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: radial-gradient(circle at 20% 20%, #fff6ea 0%, transparent 55%),
+          radial-gradient(circle at 80% 10%, #ffe3cf 0%, transparent 60%),
+          var(--bg);
+        color: var(--ink);
+        font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+        line-height: 1.6;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .page {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 32px 24px 64px;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 0.7fr);
+        gap: 32px;
+        align-items: center;
+        margin-bottom: 48px;
+      }
+
+      .logo-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: #fff8ef;
+        font-size: 14px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .logo-badge img {
+        width: 28px;
+        height: 28px;
+      }
+
+      h1 {
+        font-size: clamp(32px, 4vw, 52px);
+        line-height: 1.1;
+        margin: 16px 0;
+      }
+
+      .hero p {
+        font-size: 18px;
+        color: var(--muted);
+        max-width: 520px;
+      }
+
+      .hero-card {
+        background: var(--card);
+        border-radius: 20px;
+        padding: 28px;
+        border: 1px solid var(--line);
+        box-shadow: 0 18px 40px rgba(42, 39, 34, 0.08);
+      }
+
+      .hero-card ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 12px;
+      }
+
+      .hero-card li {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 10px;
+        align-items: start;
+        font-size: 15px;
+        color: var(--muted);
+      }
+
+      .hero-card strong {
+        color: var(--ink);
+      }
+
+      .cta-row {
+        display: flex;
+        gap: 12px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        border-radius: 999px;
+        padding: 10px 18px;
+        border: 1px solid var(--line);
+        background: #fff8ef;
+        font-size: 14px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .btn.primary {
+        background: linear-gradient(120deg, var(--accent), #f4a261);
+        color: #1b130b;
+        border-color: transparent;
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 20px rgba(42, 39, 34, 0.12);
+      }
+
+      .section {
+        margin: 48px 0;
+      }
+
+      .section h2 {
+        font-size: clamp(24px, 3vw, 34px);
+        margin-bottom: 12px;
+      }
+
+      .grid {
+        display: grid;
+        gap: 18px;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .card {
+        padding: 18px;
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        background: var(--card);
+      }
+
+      .card h3 {
+        margin: 0 0 8px;
+        font-size: 18px;
+      }
+
+      .card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .mono {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 13px;
+        background: #fff3e4;
+        padding: 2px 6px;
+        border-radius: 6px;
+        border: 1px solid rgba(227, 111, 44, 0.2);
+      }
+
+      .stripe {
+        display: grid;
+        gap: 12px;
+        padding: 24px;
+        border-radius: 18px;
+        background: linear-gradient(120deg, rgba(43, 116, 255, 0.08), rgba(227, 111, 44, 0.14));
+        border: 1px solid rgba(43, 116, 255, 0.2);
+      }
+
+      .footer {
+        margin-top: 60px;
+        padding-top: 24px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 13px;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      @media (max-width: 860px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <div>
+          <div class="logo-badge">
+            <img src="/logo_xs.png" alt="ISHAK logo" />
+            ISHAK / about
+          </div>
+          <h1>Простой issue tracker, который живет в вашем S3</h1>
+          <p>
+            ISHAK хранит проекты и задачи в обычных Markdown-файлах. Никаких
+            скрытых баз данных: только понятная структура, стандартный S3 API и
+            полный контроль над данными.
+          </p>
+          <div class="cta-row">
+            <a class="btn primary" href="/">Открыть приложение</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <ul>
+            <li>
+              <span class="mono">S3 API</span>
+              <div>
+                <strong>Нативно для агентов</strong>
+                <br />
+                Стандартный интерфейс для автоматизации и AI.
+              </div>
+            </li>
+            <li>
+              <span class="mono">Markdown</span>
+              <div>
+                <strong>Читается людьми</strong>
+                <br />
+                Структура ясна без объяснений.
+              </div>
+            </li>
+            <li>
+              <span class="mono">Ваш S3</span>
+              <div>
+                <strong>Данные остаются у вас</strong>
+                <br />
+                Полный контроль, доступ и бэкапы.
+              </div>
+            </li>
+          </ul>
+        </div>
+      </header>
+
+      <section class="section">
+        <h2>Как это устроено</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Проекты</h3>
+            <p>
+              Каждый проект — это папка в S3: <span class="mono">projects/&lt;id&gt;</span>.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Задачи</h3>
+            <p>
+              Каждая задача — Markdown файл:
+              <span class="mono">issues/&lt;issueId&gt;/issue.md</span>.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Комментарии</h3>
+            <p>
+              Комментарии — отдельные файлы
+              <span class="mono">comment_&lt;timestamp&gt;_&lt;role&gt;.md</span>.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Архив</h3>
+            <p>
+              Архивные задачи перемещаются в
+              <span class="mono">archive/&lt;issueId&gt;</span>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section stripe">
+        <h2>Почему это удобно для AI-агентов</h2>
+        <p>
+          Агенту не нужно разбираться в кастомных API. Обычные операции S3
+          позволяют читать, создавать и обновлять задачи. Markdown дает структуру,
+          понятную и модели, и человеку: заголовки, списки, статусы. Это снижает
+          ошибку интерпретации и ускоряет автоматизацию.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>Ваши данные — только у вас</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Прозрачность</h3>
+            <p>
+              Все лежит в вашем S3 бакете и доступно привычными инструментами.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Надежность</h3>
+            <p>
+              S3 обеспечивает стабильность хранения и привычные схемы резервирования.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Гибкость</h3>
+            <p>
+              Можно подключать любые скрипты, агентов и пайплайны без миграций.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <span>ISHAK — issue tracker на вашем S3.</span>
+        <span>Markdown + S3 API = прозрачная автоматизация.</span>
+      </footer>
+    </div>
+  </body>
+</html>

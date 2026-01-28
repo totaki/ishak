@@ -150,6 +150,17 @@ body::before {
     margin: 0;
 }
 
+.hero-link {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: rgba(43, 116, 255, 0.5);
+    text-underline-offset: 3px;
+}
+
+.hero-link:hover {
+    color: #2b74ff;
+}
+
 .hero-logo img {
     width: 64px;
     height: auto;
