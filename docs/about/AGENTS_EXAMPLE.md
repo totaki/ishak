@@ -1,35 +1,39 @@
 ## Пример работы через AWS CLI (s3 sync)
 
-Цель: хранить локальную копию проекта в папке `.ishak/`, синхронизируя всё из
-`projects/ishak/`, кроме `archive/`. Внутри `.ishak/` не используем подкаталог
-с project_id, так как работаем с одним проектом.
+Пример синхронизации задач через AWS CLI.
 
 ### Переменные окружения (пример)
 ```
 export AWS_ACCESS_KEY_ID=...
 export AWS_SECRET_ACCESS_KEY=...
 export AWS_DEFAULT_REGION=ru-msk
-export AWS_ENDPOINT_URL=https://hb.vkcloud-storage.ru
-export S3_BUCKET=s3-issue
+export ISHAK_BUCKET=s3-issue
+export ISHAK_PROJECT=ishak
 ```
 
-### Скачивание проекта в .ishak (без archive)
+### Скачивание проекта в .ishak
 ```
 mkdir -p .ishak
 aws s3 sync \
-  s3://$S3_BUCKET/projects/ishak/ \
+  s3://$ISHAK_BUCKET/projects/$ISHAK_PROJECT/ \
   .ishak/ \
-  --exclude "archive/*" \
-  --endpoint-url $AWS_ENDPOINT_URL
+  --endpoint-url https://hb.vkcloud-storage.ru \
+  --region ru-msk
 ```
 
-### Загрузка изменений обратно (без archive)
+### Загрузка изменений обратно
 ```
 aws s3 sync \
   .ishak/ \
-  s3://$S3_BUCKET/projects/ishak/ \
-  --exclude "archive/*" \
-  --endpoint-url $AWS_ENDPOINT_URL
+  s3://$ISHAK_BUCKET/projects/$ISHAK_PROJECT/ \
+  --endpoint-url https://hb.vkcloud-storage.ru \
+  --region ru-msk
+```
+
+### Полезные alias
+```
+alias ishak-sync-down='aws s3 sync s3://$ISHAK_BUCKET/projects/$ISHAK_PROJECT/ .ishak/ --endpoint-url https://hb.vkcloud-storage.ru --region ru-msk'
+alias ishak-sync-up='aws s3 sync .ishak/ s3://$ISHAK_BUCKET/projects/$ISHAK_PROJECT/ --endpoint-url https://hb.vkcloud-storage.ru --region ru-msk'
 ```
 
 ### Структура локальной папки
@@ -39,7 +43,11 @@ aws s3 sync \
   META.md
   issues/
     <issue_id>/
-      issue.md
+      README.md
       comment_<timestamp>_<role>.md
       files/
 ```
+
+### Формат timestamp в комментариях
+`<timestamp>` — это Unix time в миллисекундах (UTC), например:
+`comment_1738865445123_agent.md`.
